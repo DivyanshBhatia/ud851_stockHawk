@@ -2,6 +2,7 @@ package com.udacity.stockhawk.ui;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -64,7 +65,7 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(StockViewHolder holder, final int position) {
+    public void onBindViewHolder(final StockViewHolder holder, final int position) {
 
         cursor.moveToPosition(position);
 
@@ -78,6 +79,10 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
                 //It is important to movetoPosition since prior to this your cursor would be at last item in list
                 cursor.moveToPosition(position);
                 Log.v("StockAdapter",cursor.getString(Contract.Quote.POSITION_SYMBOL)+"\r\n"+cursor.getString(Contract.Quote.POSITION_HISTORY));
+                Intent detailIntent=new Intent(MainActivity.context,DetailActivity.class);
+                detailIntent.putExtra("StockQuoteSymbol",cursor.getString(Contract.Quote.POSITION_SYMBOL));
+                detailIntent.putExtra("StockQuoteHistory",cursor.getString(Contract.Quote.POSITION_HISTORY));
+                holder.symbol.getContext().startActivity(detailIntent);
             }
         });
 
