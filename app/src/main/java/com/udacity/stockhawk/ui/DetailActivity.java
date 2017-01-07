@@ -55,7 +55,9 @@ public class DetailActivity extends Activity {
         int index=0;
         while(quoteVar>=0){
             dateList.add(String.valueOf(DateFormat.format("dd/MM/yyyy",Long.parseLong(quoteLine[quoteVar].replace(" ","").split(",")[0]))));
-            entries.add(new Entry(index++, Float.parseFloat(quoteLine[quoteVar].replace(" ","").split(",")[1])));
+            Entry entry=new Entry(index++, Float.parseFloat(quoteLine[quoteVar].replace(" ","").split(",")[1]));
+
+            entries.add(entry);
             quoteVar--;
         }
 
@@ -67,9 +69,15 @@ public class DetailActivity extends Activity {
             }
         };
         LineDataSet dataSet = new LineDataSet(entries, "Label");
+        dataSet.setValueTextSize(10f);
+        dataSet.setValueTextColor(Color.GREEN);
         dataSet.setCircleColor(Color.CYAN); // styling
         LineData lineData = new LineData(dataSet);
         quoteChart.setData(lineData);
+        quoteChart.setNoDataTextColor(Color.WHITE);
+        quoteChart.getXAxis().setTextColor(Color.GREEN);
+        quoteChart.getAxisRight().setTextColor(Color.GREEN);
+        quoteChart.getAxisLeft().setTextColor(Color.GREEN);
         XAxis xAxis = quoteChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(formatter);
