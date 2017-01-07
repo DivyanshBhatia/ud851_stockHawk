@@ -12,8 +12,8 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.MainActivity">
             <intent-filter>
@@ -40,7 +40,17 @@
 
         <activity
             android:name=".ui.DetailActivity"
-            android:label="@string/title_activity_detail"></activity>
+            android:label="@string/title_activity_detail" />
+
+        <receiver android:name=".ui.utils.StockAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/stock_app_widget_provider_info" />
+        </receiver>
     </application>
 
 </manifest>

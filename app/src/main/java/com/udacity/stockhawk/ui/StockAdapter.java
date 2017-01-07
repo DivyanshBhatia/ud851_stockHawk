@@ -72,7 +72,8 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
         holder.symbol.setText(cursor.getString(Contract.Quote.POSITION_SYMBOL));
         holder.price.setText(dollarFormat.format(cursor.getFloat(Contract.Quote.POSITION_PRICE)));
-
+        //To handle accessiblity of stock symbols
+        holder.symbol.setContentDescription(cursor.getString(Contract.Quote.POSITION_SYMBOL));
         holder.symbol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

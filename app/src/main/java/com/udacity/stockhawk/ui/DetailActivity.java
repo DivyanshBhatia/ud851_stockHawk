@@ -56,7 +56,6 @@ public class DetailActivity extends Activity {
         while(quoteVar>=0){
             dateList.add(String.valueOf(DateFormat.format("dd/MM/yyyy",Long.parseLong(quoteLine[quoteVar].replace(" ","").split(",")[0]))));
             Entry entry=new Entry(index++, Float.parseFloat(quoteLine[quoteVar].replace(" ","").split(",")[1]));
-
             entries.add(entry);
             quoteVar--;
         }
@@ -68,7 +67,7 @@ public class DetailActivity extends Activity {
                 return (String) dateList.toArray()[(int) value];
             }
         };
-        LineDataSet dataSet = new LineDataSet(entries, "Label");
+        LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.label_entry));
         dataSet.setValueTextSize(10f);
         dataSet.setValueTextColor(Color.GREEN);
         dataSet.setCircleColor(Color.CYAN); // styling
