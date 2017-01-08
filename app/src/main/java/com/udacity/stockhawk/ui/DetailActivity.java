@@ -3,7 +3,10 @@ package com.udacity.stockhawk.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -21,27 +24,31 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends AppCompatActivity {
 
     private String quoteSymbol;
     private String quoteHistory;
-    @BindView(R.id.quote_symbol_id)
-    TextView quoteSymbolView;
-    @BindView(R.id.quote_history_id)
-    TextView quoteHistoryView;
     @BindView(R.id.chart_id)
     LineChart quoteChart;
+
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+        actionBar=this.getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         Bundle bundle = this.getIntent().getExtras();
         if(bundle!=null){
             quoteSymbol=bundle.getString("StockQuoteSymbol");
             quoteHistory=bundle.getString("StockQuoteHistory");
-            quoteSymbolView.setText(quoteSymbol);
+
+            if(actionBar!=null && quoteSymbol!=null)
+            actionBar.setTitle(getResources().getString(R.string.details_placeholder)+" "+quoteSymbol.toUpperCase());
             addGraph(quoteHistory);
         }
     }
@@ -81,5 +88,14 @@ public class DetailActivity extends Activity {
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(formatter);
         quoteChart.invalidate();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id=item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
