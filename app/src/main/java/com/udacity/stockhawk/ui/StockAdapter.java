@@ -81,8 +81,8 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
                 cursor.moveToPosition(position);
                 Log.v("StockAdapter",cursor.getString(Contract.Quote.POSITION_SYMBOL)+"\r\n"+cursor.getString(Contract.Quote.POSITION_HISTORY));
                 Intent detailIntent=new Intent(MainActivity.context,DetailActivity.class);
-                detailIntent.putExtra("StockQuoteSymbol",cursor.getString(Contract.Quote.POSITION_SYMBOL));
-                detailIntent.putExtra("StockQuoteHistory",cursor.getString(Contract.Quote.POSITION_HISTORY));
+                detailIntent.putExtra(context.getResources().getString(R.string.stock_quote_symbol),cursor.getString(Contract.Quote.POSITION_SYMBOL));
+                detailIntent.putExtra(context.getResources().getString(R.string.stock_quote_history),cursor.getString(Contract.Quote.POSITION_HISTORY));
                 holder.symbol.getContext().startActivity(detailIntent);
             }
         });

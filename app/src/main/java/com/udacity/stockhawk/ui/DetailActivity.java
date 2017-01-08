@@ -44,8 +44,8 @@ public class DetailActivity extends AppCompatActivity {
         }
         Bundle bundle = this.getIntent().getExtras();
         if(bundle!=null){
-            quoteSymbol=bundle.getString("StockQuoteSymbol");
-            quoteHistory=bundle.getString("StockQuoteHistory");
+            quoteSymbol=bundle.getString(getApplicationContext().getResources().getString(R.string.stock_quote_symbol));
+            quoteHistory=bundle.getString(getApplicationContext().getResources().getString(R.string.stock_quote_history));
 
             if(actionBar!=null && quoteSymbol!=null)
             actionBar.setTitle(getResources().getString(R.string.details_placeholder)+" "+quoteSymbol.toUpperCase());

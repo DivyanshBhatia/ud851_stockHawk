@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
+import android.support.annotation.StringDef;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -31,6 +33,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -49,10 +54,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private StockAdapter adapter;
     public static Context context;
 
+    public static final String DOLLAR_FORMAT = "dollarFormat";
+    public static final String DOLLAR_FORMAT_PLUS = "dollarFormatPlus";
+    public static final String PERCENTAGE_FORMAT = "percentageFormat";
+
     @Override
     public void onClick(String symbol) {
         Timber.d("Symbol clicked: %s", symbol);
     }
+
+    @StringDef({DOLLAR_FORMAT, DOLLAR_FORMAT_PLUS,PERCENTAGE_FORMAT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DecimalFormatType {}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -43,5 +43,7 @@
     <string name="empty_stock_list">It seems there are no stock in preferences. Why not add some and experience the market at your app.</string>
     <string name="symbol_dummy">STOCK</string>
     <string name="details_placeholder">Details of</string>
+    <string name="stock_quote_symbol" translatable="false">StockQuoteSymbol</string>
+    <string name="stock_quote_history" translatable="false">"StockQuoteHistory"</string>
 
 </resources>
