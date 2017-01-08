@@ -4,5 +4,8 @@
     android:initialLayout="@layout/stock_app_widget_provider"
     android:minHeight="@dimen/widget_default_height"
     android:minWidth="@dimen/widget_default_width"
+    android:minResizeHeight="@dimen/widget_detail_min_resize_height"
+    android:minResizeWidth="@dimen/widget_detail_min_resize_width"
     android:updatePeriodMillis="0"
+    android:resizeMode="horizontal|vertical"
     ></appwidget-provider>

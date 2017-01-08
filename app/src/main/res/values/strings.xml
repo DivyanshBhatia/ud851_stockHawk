@@ -40,5 +40,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="widget_name">Stock Hawk</string>
+    <string name="empty_stock_list">It seems there are no stock in preferences. Why not add some and experience the market at your app.</string>
+    <string name="symbol_dummy">STOCK</string>
 
 </resources>
