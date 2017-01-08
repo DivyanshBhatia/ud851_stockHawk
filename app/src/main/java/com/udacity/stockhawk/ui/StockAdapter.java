@@ -2,6 +2,7 @@ package com.udacity.stockhawk.ui;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -64,20 +65,25 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(StockViewHolder holder, final int position) {
+    public void onBindViewHolder(final StockViewHolder holder, final int position) {
 
         cursor.moveToPosition(position);
 
 
         holder.symbol.setText(cursor.getString(Contract.Quote.POSITION_SYMBOL));
         holder.price.setText(dollarFormat.format(cursor.getFloat(Contract.Quote.POSITION_PRICE)));
-
+        //To handle accessiblity of stock symbols
+        holder.symbol.setContentDescription(cursor.getString(Contract.Quote.POSITION_SYMBOL));
         holder.symbol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //It is important to movetoPosition since prior to this your cursor would be at last item in list
                 cursor.moveToPosition(position);
                 Log.v("StockAdapter",cursor.getString(Contract.Quote.POSITION_SYMBOL)+"\r\n"+cursor.getString(Contract.Quote.POSITION_HISTORY));
+                Intent detailIntent=new Intent(MainActivity.context,DetailActivity.class);
+                detailIntent.putExtra("StockQuoteSymbol",cursor.getString(Contract.Quote.POSITION_SYMBOL));
+                detailIntent.putExtra("StockQuoteHistory",cursor.getString(Contract.Quote.POSITION_HISTORY));
+                holder.symbol.getContext().startActivity(detailIntent);
             }
         });
 
