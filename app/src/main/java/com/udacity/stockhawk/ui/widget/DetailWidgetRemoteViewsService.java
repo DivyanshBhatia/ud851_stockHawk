@@ -14,6 +14,7 @@ import android.widget.RemoteViewsService;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.ui.DetailActivity;
 import com.udacity.stockhawk.ui.utils.DecimalFormatType;
 import com.udacity.stockhawk.ui.utils.FormatChange;
 
@@ -80,10 +81,9 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 }
                 RemoteViews views = new RemoteViews(getPackageName(),
                         R.layout.stock_widget_layout);
-                String positionSymbol=data.getString(Contract.Quote.POSITION_SYMBOL).toUpperCase();
+
                 views.setTextViewText(R.id.symbol,data.getString(Contract.Quote.POSITION_SYMBOL).toUpperCase());
                 views.setTextViewText(R.id.price,FormatChange.convertToDecimalFormat(data.getFloat(Contract.Quote.POSITION_PRICE), DecimalFormatType.DOLLAR_FORMAT));
-
 
                 float rawAbsoluteChange = data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
                 float percentageChange = data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
@@ -94,10 +94,11 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 } else {
                     views.setInt(R.id.change,"setBackgroundResource",R.drawable.percent_change_pill_red);
                 }
-
-                String change = FormatChange.convertToDecimalFormat(rawAbsoluteChange, DecimalFormatType.DOLLAR_FORMAT_PLUS);
+                final Intent fillInIntent = new Intent(getApplicationContext(), DetailActivity.class);
+                fillInIntent.putExtra("StockQuoteSymbol",data.getString(Contract.Quote.POSITION_SYMBOL));
+                fillInIntent.putExtra("StockQuoteHistory",data.getString(Contract.Quote.POSITION_HISTORY));
+                views.setOnClickFillInIntent(R.id.symbol, fillInIntent);
                 String percentage = FormatChange.convertToDecimalFormat(percentageChange/100, DecimalFormatType.PERCENTAGE_FORMAT);
-
                 views.setTextViewText(R.id.change,percentage);
                 return views;
             }
