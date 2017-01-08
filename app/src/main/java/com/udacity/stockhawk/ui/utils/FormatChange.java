@@ -1,8 +1,14 @@
 package com.udacity.stockhawk.ui.utils;
 
+import com.udacity.stockhawk.ui.MainActivity;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
+
+import static com.udacity.stockhawk.ui.MainActivity.DOLLAR_FORMAT;
+import static com.udacity.stockhawk.ui.MainActivity.DOLLAR_FORMAT_PLUS;
+import static com.udacity.stockhawk.ui.MainActivity.PERCENTAGE_FORMAT;
 
 /**
  * Created by dnbhatia on 1/8/2017.
@@ -16,7 +22,7 @@ public class FormatChange {
 
     private FormatChange() {
     }
-    public static String convertToDecimalFormat(float change, DecimalFormatType format){
+    public static String convertToDecimalFormat(float change, @MainActivity.DecimalFormatType String format){
         DecimalFormat currencyFormat = null;
 
         switch(format){
@@ -34,8 +40,7 @@ public class FormatChange {
                 currencyFormat.setPositivePrefix("+");
                 break;
             default:
-                throw new IllegalArgumentException("Given Format is not supported");
-
+                return null;
             }
         return currencyFormat.format(change);
     }
