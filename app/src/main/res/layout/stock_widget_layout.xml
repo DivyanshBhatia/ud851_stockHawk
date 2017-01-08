@@ -27,7 +27,7 @@
             style="@style/BidPriceTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10sp"
+            android:layout_marginEnd="20sp"
             tools:text="1000.00" />
 
         <TextView
@@ -35,7 +35,7 @@
             style="@style/PercentChangeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/percent_change_pill_green"
+            tools:background="@drawable/percent_change_pill_green"
             android:paddingStart="3dp"
             android:paddingEnd="3dp"
             tools:text="100%" />
